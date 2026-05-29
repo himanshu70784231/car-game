@@ -46,12 +46,14 @@ const lanePositions = [62, 152, 242];
 const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
 
-leftBtn.addEventListener("touchstart", () => {
-  playerX -= 30;
+leftBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveLeft();
 });
 
-rightBtn.addEventListener("touchstart", () => {
-  playerX += 30;
+rightBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveRight();
 });
 document.addEventListener('keydown', (e) => {
     if (e.key === 'p' || e.key === 'P') {
