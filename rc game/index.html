@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highway Racing</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="game-wrapper">
+        <div class="game-screen">
+            <!-- Night Sky -->
+            <div class="sky">
+                <div class="moon"></div>
+                <div class="stars">
+                    <span>✦</span><span>✦</span><span>✦</span><span>✦</span>
+                </div>
+            </div>
+            
+            <!-- Mountains -->
+            <div class="mountains">
+                <div class="mountain">🏔️</div>
+                <div class="mountain">🏔️</div>
+            </div>
+            
+            <!-- Highway Road -->
+            <div class="road-area">
+                <div class="road">
+                    <div class="lane line-1"></div>
+                    <div class="lane line-2"></div>
+                    <div class="lane line-3"></div>
+                </div>
+                <div class="road-edge left-edge"></div>
+                <div class="road-edge right-edge"></div>
+            </div>
+            
+            <!-- Trees -->
+            <div class="trees-left" id="trees-left"></div>
+            <div class="trees-right" id="trees-right"></div>
+            
+            <!-- Player Car (Facing Camera) -->
+            <div class="player-car" id="player-car">
+                <div class="car-body">🚗</div>
+                <div class="car-lights">
+                    <div class="light"></div>
+                </div>
+            </div>
+            
+            <!-- Oncoming Enemies -->
+            <div id="enemy-container"></div>
+            
+            <!-- Score Bonus Popup -->
+            <div class="bonus-popup" id="bonus-popup"></div>
+            
+            <!-- HUD -->
+            <div class="hud">
+                <div class="hud-item">
+                    <span class="hud-label">SCORE</span>
+                    <span class="hud-value" id="score">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">BEST</span>
+                    <span class="hud-value" id="best">0</span>
+                </div>
+                <div class="hud-item">
+                    <span class="hud-label">LVL</span>
+                    <span class="hud-value" id="level">1</span>
+                </div>
+                <button class="pause-btn" id="pause-btn" onclick="togglePause()">⏸</button>
+            </div>
+            
+            <!-- Car Select -->
+            <div class="car-options">
+                <select id="car-type" onchange="changePlayerCar()">
+                    <option value="red">🚗 Red Sport</option>
+                    <option value="blue">🚙 Blue SUV</option>
+                    <option value="black">🚘 Black Luxury</option>
+                    <option value="yellow">🚌 Yellow Bus</option>
+                    <option value="green">🚐 Green Van</option>
+                </select>
+            </div>
+            
+            <!-- Start Screen -->
+            <div class="overlay" id="start-screen">
+                <div class="title-logo">🚗💨</div>
+                <h1>HIGHWAY<br><span class="accent">RACING</span></h1>
+                <p class="info">Pass oncoming cars to score!</p>
+                <div class="controls-info">
+                    <p>⬅️ A or Left - Change Lane Left</p>
+                    <p>➡️ D or Right - Change Lane Right</p>
+                </div>
+                <button class="start-btn" onclick="startGame()">START ENGINE</button>
+            </div>
+            
+            <!-- Pause Screen -->
+            <div class="overlay" id="pause-screen">
+                <h2 class="paused-text">⏸ PAUSED</h2>
+                <button class="resume-btn" onclick="togglePause()">RESUME</button>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div class="overlay" id="game-over-screen">
+                <div class="crash-text">💥</div>
+                <h2>CRASHED!</h2>
+                <div class="final-result">
+                    <p>Final Score</p>
+                    <span class="score-number" id="final-score">0</span>
+                </div>
+                <button class="restart-btn" onclick="restartGame()">DRIVE AGAIN</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

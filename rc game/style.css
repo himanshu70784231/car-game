@@ -1,0 +1,487 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+}
+
+.game-wrapper {
+    position: relative;
+}
+
+.game-screen {
+    position: relative;
+    width: 360px;
+    height: 640px;
+    background: linear-gradient(180deg, #0a0a1a 0%, #1a1a3a 40%, #0a0a0a 100%);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(255, 140, 0, 0.2), 0 8px 25px rgba(0,0,0,0.8);
+    border: 3px solid #333;
+}
+
+/* Sky */
+.sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, #0a0a2a, #1a1a3a);
+}
+
+.moon {
+    position: absolute;
+    top: 25px;
+    right: 40px;
+    width: 45px;
+    height: 45px;
+    background: radial-gradient(circle, #ffffcc, #e6e6aa);
+    border-radius: 50%;
+    box-shadow: 0 0 25px #ffffcc, 0 0 50px #ffff66;
+}
+
+.stars {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.stars span:nth-child(2) { animation-delay: 0.5s; }
+.stars span:nth-child(3) { animation-delay: 1s; }
+.stars span:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Mountains */
+.mountains {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+}
+
+.mountain {
+    position: absolute;
+    font-size: 100px;
+    bottom: 0;
+    opacity: 0.4;
+    filter: brightness(0.5);
+    animation: mountainMove 3s linear infinite;
+}
+
+.mountain:first-child { left: 10px; font-size: 80px; }
+.mountain:last-child { right: 20px; font-size: 90px; }
+
+@keyframes mountainMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-20px); }
+}
+
+/* Road */
+.road-area {
+    position: absolute;
+    top: 180px;
+    left: 50%;
+    transform: translateX(-50%) perspective(300px) rotateX(55deg);
+    transform-origin: top center;
+    width: 240px;
+    height: 480px;
+}
+
+.road {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    border-radius: 8px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+    overflow: hidden;
+}
+
+.lane {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 20px,
+        #fff 20px,
+        #fff 40px
+    );
+    animation: laneMove 0.4s linear infinite;
+    opacity: 0.7;
+}
+
+.line-1 { left: 33%; }
+.line-2 { left: 50%; }
+.line-3 { left: 67%; }
+
+@keyframes laneMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 40px; }
+}
+
+.road-edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 12px;
+    background: repeating-linear-gradient(
+        45deg,
+        #cc0000,
+        #cc0000 10px,
+        #fff 10px,
+        #fff 18px
+    );
+    opacity: 0.8;
+}
+
+.left-edge { left: 0; }
+.right-edge { right: 0; }
+
+/* Trees */
+.trees-left, .trees-right {
+    position: absolute;
+    top: 180px;
+    width: 50px;
+    height: 100%;
+    pointer-events: none;
+}
+
+.trees-left {
+    left: 0;
+    transform: perspective(200px) rotateX(55deg);
+    transform-origin: top;
+}
+
+.trees-right {
+    right: 0;
+    transform: perspective(200px) rotateX(55deg);
+    transform-origin: top;
+}
+
+.side-tree {
+    position: absolute;
+    font-size: 30px;
+    animation: treeScroll 1s linear infinite;
+}
+
+@keyframes treeScroll {
+    from { top: -40px; }
+    to { top: 520px; }
+}
+
+/* Player Car */
+.player-car {
+    position: absolute;
+    width: 55px;
+    height: 85px;
+    bottom: 55px;
+    left: 152px;
+    z-index: 100;
+    transition: left 0.12s ease-out;
+}
+
+.car-body {
+    font-size: 58px;
+    text-align: center;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,0.8));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.car-lights {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+}
+
+.light {
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(ellipse, rgba(255, 255, 200, 0.9), transparent);
+    border-radius: 50%;
+    filter: blur(3px);
+    animation: headlightPulse 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes headlightPulse {
+    from { opacity: 0.8; height: 18px; }
+    to { opacity: 1; height: 25px; }
+}
+
+/* Oncoming Enemy */
+.enemy-car {
+    position: absolute;
+    width: 50px;
+    height: 80px;
+    font-size: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.6));
+}
+
+.enemy-car::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 15px;
+    background: rgba(255, 200, 100, 0.4);
+    border-radius: 50%;
+    filter: blur(4px);
+}
+
+/* Bonus Popup */
+.bonus-popup {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    font-weight: 900;
+    color: #00ff00;
+    text-shadow: 0 0 15px #00ff00, 0 0 30px #00ff00;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 200;
+}
+
+.show-bonus {
+    animation: bonusAnim 0.8s ease-out forwards;
+}
+
+@keyframes bonusAnim {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); top: 40%; }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); top: 30%; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); top: 20%; }
+}
+
+/* HUD */
+.hud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(0,0,0,0.85), transparent);
+    z-index: 150;
+}
+
+.hud-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.12);
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.hud-label {
+    font-size: 7px;
+    color: #00ff88;
+    letter-spacing: 1px;
+}
+
+.hud-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+.pause-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Car Options */
+.car-options {
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    z-index: 150;
+}
+
+.car-options select {
+    background: rgba(0,0,0,0.75);
+    color: #fff;
+    border: 1px solid #444;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.92);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+}
+
+.title-logo {
+    font-size: 80px;
+    animation: rumble 0.3s ease-in-out infinite;
+}
+
+@keyframes rumble {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+.overlay h1 {
+    font-size: 34px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 8px;
+}
+
+.accent {
+    color: #ff8800;
+    text-shadow: 0 0 25px #ff8800;
+}
+
+.info {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.controls-info {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.controls-info p {
+    color: #666;
+    font-size: 11px;
+    margin: 6px 0;
+}
+
+.start-btn, .resume-btn, .restart-btn {
+    padding: 14px 45px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.start-btn {
+    background: linear-gradient(45deg, #ff6600, #ff8800);
+}
+
+.start-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 136, 0, 0.7);
+}
+
+.paused-text {
+    color: #ffcc00;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.resume-btn {
+    background: linear-gradient(45deg, #00cc66, #00ee88);
+}
+
+.crash-text {
+    font-size: 100px;
+    animation: crashBounce 0.5s ease;
+}
+
+@keyframes crashBounce {
+    0% { transform: scale(0) rotate(-20deg); }
+    60% { transform: scale(1.4) rotate(10deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+#game-over-screen h2 {
+    color: #ff3333;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.final-result {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.final-result p {
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.score-number {
+    font-size: 48px;
+    font-weight: 900;
+    color: #ffcc00;
+    text-shadow: 0 0 20px #ffcc00;
+}
+
+.restart-btn {
+    background: linear-gradient(45deg, #ff3333, #ff6600);
+}
+
+.restart-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 80, 0, 0.7);
+}
