@@ -43,6 +43,16 @@ bestElement.innerText = bestScore;
 const lanePositions = [62, 152, 242];
 
 // Keyboard Controls
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+
+leftBtn.addEventListener("touchstart", () => {
+  playerX -= 30;
+});
+
+rightBtn.addEventListener("touchstart", () => {
+  playerX += 30;
+});
 document.addEventListener('keydown', (e) => {
     if (e.key === 'p' || e.key === 'P') {
         togglePause();

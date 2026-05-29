@@ -5,6 +5,23 @@
     padding: 0;
     box-sizing: border-box;
 }
+.mobile-controls{
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mobile-controls button{
+  width: 70px;
+  height: 70px;
+  font-size: 30px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+}
 
 body {
     background: #050505;
